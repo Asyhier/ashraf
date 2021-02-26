@@ -1,22 +1,23 @@
-/**
- * Return status code or error for a given url. Tip: wrap the call around the Google Sheets =isurl() function to make sure that only valid URLs are checked, and the =unique() function to make sure every unique URL is checked only once.
- *
- * @param {url} valid url
- * @return result (status code or error message)
- *
- * @customfunction
- */
-function httpstatuscode() {
-    var url = "google.com"
-    console.log('url : '+url)
-    var result = [];
-    // trim url to prevent (rare) errors
-    url.toString().trim();
-    console.log('url trim : '+url)
-    // don't break if error, but instead return it as a message, also don't follow redirects
+function readURL() {
+
+  for (var i=2; i<=530; i++) {
+    range = 'A'+i
+    console.log(range)
+
+    var url = SpreadsheetApp.getActiveSheet().getRange(range).getDisplayValue()
+  
+    console.log(url)
+    testURL(i,url)
+
+  }
+
+}
+
+function testURL(i,url) {
+    var result = []
     var options = {
         'muteHttpExceptions': true,
-        'followRedirects': false,
+        'followRedirects': true,
     };
     // int - returns status code
     try {
@@ -27,6 +28,17 @@ function httpstatuscode() {
         result.push(error.toString());
     } finally {
         console.log('result : '+result)
-        return result;
+        //return result;
     }
+
+    inserData(i,result)
+}
+
+function inserData(i,result) {
+    var insertCol = 'B'+i
+    var setRemark = SpreadsheetApp.getActiveSheet().getRange(insertCol)
+
+    setRemark.setValue([result]).setFontColor('#000000').setFontLine('none')
+    
+
 }
