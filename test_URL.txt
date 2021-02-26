@@ -6,14 +6,17 @@
  *
  * @customfunction
  */
-function httpstatuscode(url) {
+function httpstatuscode() {
+    var url = "google.com"
+    console.log('url : '+url)
     var result = [];
     // trim url to prevent (rare) errors
     url.toString().trim();
+    console.log('url trim : '+url)
     // don't break if error, but instead return it as a message, also don't follow redirects
     var options = {
         'muteHttpExceptions': true,
-        'followRedirects': true,
+        'followRedirects': false,
     };
     // int - returns status code
     try {
@@ -23,6 +26,7 @@ function httpstatuscode(url) {
     catch (error) {
         result.push(error.toString());
     } finally {
+        console.log('result : '+result)
         return result;
     }
 }
