@@ -1,5 +1,5 @@
 /**
- * Return status code or error for a given url. Tip: wrap the call around the Google Sheets =isurl() function to make sure that only valid URLs are checked, and the =unique() function to make sure every unique URL is checked only once. See https://eikhart.com/blog/google-sheets-http-status-codes for an in-depth explanation.
+ * Return status code or error for a given url. Tip: wrap the call around the Google Sheets =isurl() function to make sure that only valid URLs are checked, and the =unique() function to make sure every unique URL is checked only once.
  *
  * @param {url} valid url
  * @return result (status code or error message)
