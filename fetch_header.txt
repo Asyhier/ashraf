@@ -5,17 +5,35 @@ function guessweb(url) {
     followRedirects: true 
   });
 
-  var headers = response.getAllHeaders();
-  
-  console.log(headers);
-  
-  if ('Server' in headers) {
-    return headers.Server;
+  var headers = []
+
+  try {
+        headers = response.getAllHeaders();
+  }
+  // string - or returns an error (usually 'DNS error' if domain does not exist)
+  catch (error) {
+        headers = response.push(error.toString());
+  } finally {
+        if ('Server' in headers) {
+          return headers.Server;
+        }
+        console.log(headers);
+        return result;
   }
 
-  return "UNKNOWN";
 }
 
-function test_guessweb(){
-  console.log(guessweb("google.com"));
+function readURL() {
+
+  for (var i=2; i<=530; i++) {
+    range = 'A'+i
+    console.log(range)
+
+    var url = SpreadsheetApp.getActiveSheet().getRange(range).getDisplayValue()
+  
+    console.log(url)
+    guessweb(url)
+
+  }
+
 }
