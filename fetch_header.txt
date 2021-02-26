@@ -17,5 +17,5 @@ function guessweb(url) {
 }
 
 function test_guessweb(){
-  console.log(guessweb("clinic.davetsa.sabah.gov.my"));
+  console.log(guessweb("google.com"));
 }
