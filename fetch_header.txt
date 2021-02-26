@@ -1,0 +1,21 @@
+function guessweb(url) {
+  var response = UrlFetchApp.fetch(url, { 
+    muteHttpExceptions: true,
+    validateHttpsCertificates: false,
+    followRedirects: true 
+  });
+
+  var headers = response.getAllHeaders();
+  
+  console.log(headers);
+  
+  if ('Server' in headers) {
+    return headers.Server;
+  }
+
+  return "UNKNOWN";
+}
+
+function test_guessweb(){
+  console.log(guessweb("clinic.davetsa.sabah.gov.my"));
+}
